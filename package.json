@@ -1,21 +1,34 @@
 {
   "private": true,
   "scripts": {
-    "test": "jest"
+    "start": "webpack-dev-server --env.dev --progress",
+    "build": "webpack --env.prod --progress",
+    "test": "jest",
+    "validate:tools": "tsc -p tsconfig.tools.json"
   },
   "devDependencies": {
     "@types/enzyme": "3.1.10",
     "@types/enzyme-adapter-react-16": "1.0.2",
+    "@types/html-webpack-plugin": "2.30.3",
     "@types/jest": "23.0.0",
     "@types/react": "16.3.16",
     "@types/react-dom": "16.0.6",
+    "@types/webpack": "4.4.0",
+    "@types/webpack-env": "1.13.6",
     "enzyme": "3.3.0",
     "enzyme-adapter-react-16": "1.1.1",
+    "fork-ts-checker-webpack-plugin": "0.4.2",
+    "html-webpack-plugin": "3.2.0",
     "jest": "23.1.0",
     "jest-runner-tsc": "1.2.0",
     "prettier": "1.13.4",
     "ts-jest": "22.4.6",
-    "typescript": "2.9.1"
+    "ts-loader": "4.3.1",
+    "typescript": "2.9.1",
+    "webpack": "4.11.1",
+    "webpack-cli": "3.0.2",
+    "webpack-config-utils": "2.3.0",
+    "webpack-dev-server": "3.1.4"
   },
   "dependencies": {
     "react": "16.4.0",
