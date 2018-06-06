@@ -45,6 +45,13 @@
     "@types/cheerio" "*"
     "@types/react" "*"
 
+"@types/fork-ts-checker-webpack-plugin@0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@types/fork-ts-checker-webpack-plugin/-/fork-ts-checker-webpack-plugin-0.4.0.tgz#e2bf0f9cc75c2b7ce97d171853950f04b311d82d"
+  dependencies:
+    "@types/node" "*"
+    "@types/webpack" "*"
+
 "@types/html-minifier@*":
   version "3.5.2"
   resolved "https://registry.yarnpkg.com/@types/html-minifier/-/html-minifier-3.5.2.tgz#f897a13d847a774e9b6fd91497e9b0e0ead71c35"
