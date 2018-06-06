@@ -1,0 +1,24 @@
+{
+  "private": true,
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@types/enzyme": "3.1.10",
+    "@types/enzyme-adapter-react-16": "1.0.2",
+    "@types/jest": "23.0.0",
+    "@types/react": "16.3.16",
+    "@types/react-dom": "16.0.6",
+    "enzyme": "3.3.0",
+    "enzyme-adapter-react-16": "1.1.1",
+    "jest": "23.1.0",
+    "jest-runner-tsc": "1.2.0",
+    "prettier": "1.13.4",
+    "ts-jest": "22.4.6",
+    "typescript": "2.9.1"
+  },
+  "dependencies": {
+    "react": "16.4.0",
+    "react-dom": "16.4.0"
+  }
+}
