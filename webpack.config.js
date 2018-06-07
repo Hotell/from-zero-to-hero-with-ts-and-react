@@ -10,16 +10,10 @@ const tsConfig = resolve(__dirname, 'tsconfig.build.json')
 /**
  * @type {import('ts-loader').TsLoader.Options}
  */
-// prettier-ignore
-const tsLoaderOptionsRules = ({
+const tsLoaderOptionsRules = /** @type {import('ts-loader').TsLoader.Options}*/ ({
   configFile: tsConfig,
   transpileOnly: true
-
-  // compilerOptions: {
-  //   allowJs: false,
-  //   checkJs: false
-  // }
-} /** @type {import('ts-loader').TsLoader.Options}*/ )
+})
 
 /**
  * @type {Partial<import('webpack-dev-server').WebpackDevServer.Config>}
