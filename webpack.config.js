@@ -7,10 +7,7 @@ const { getIfUtils, removeEmpty } = require('webpack-config-utils')
 
 const tsConfig = resolve(__dirname, 'tsconfig.build.json')
 
-/**
- * @type {import('ts-loader').TsLoader.Options}
- */
-const tsLoaderOptionsRules = /** @type {import('ts-loader').TsLoader.Options}*/ ({
+const tsLoaderOptionsRules = /** @type {import('ts-loader').Options}*/ ({
   configFile: tsConfig,
   transpileOnly: true
 })
