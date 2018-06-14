@@ -5,38 +5,57 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const { getIfUtils, removeEmpty } = require('webpack-config-utils')
 
-const tsConfig = resolve(__dirname, 'tsconfig.build.json')
-
-const tsLoaderOptionsRules = /** @type {import('ts-loader').Options}*/ ({
-  configFile: tsConfig,
-  transpileOnly: true
-})
+/**
+ * @typedef {Partial<import('webpack-dev-server').WebpackDevServer.Config>} WebpackDevServerConfig
+ */
 
 /**
- * @type {Partial<import('webpack-dev-server').WebpackDevServer.Config>}
+ * @typedef {import('webpack').Configuration & {devServer: WebpackDevServerConfig}} WebpackConfig
+ */
+
+const ROOT = resolve(__dirname)
+const SRC_PATH = resolve(ROOT, 'src')
+const PATHS = {
+  entry: resolve(SRC_PATH, 'main.ts'),
+  output: resolve(ROOT, 'dist'),
+  tsConfig: resolve(ROOT, 'tsconfig.prod.json'),
+  content: resolve(SRC_PATH, 'public'),
+  html: resolve(SRC_PATH, 'index.html')
+}
+
+/**
+ * @type {Partial<import('ts-loader').Options>}
+ */
+const tsLoaderOptionsRules = {
+  configFile: PATHS.tsConfig,
+  transpileOnly: true
+}
+
+/**
+ * @type {WebpackDevServerConfig}
  */
 const devServer = {
   overlay: true,
-  contentBase: join(__dirname, 'src/public'),
+  contentBase: PATHS.content,
   historyApiFallback: true,
   hot: true
 }
 
 /**
- * @type {(env:{production?:boolean})=>import('webpack').Configuration & {devServer: Partial<import('webpack-dev-server').WebpackDevServer.Config>}}
+ *
+ * @param {{prod:boolean} | {dev:boolean}} env
+ * @returns {WebpackConfig}
  */
 const config = (env) => {
   const { ifProd, ifDev } = getIfUtils(env)
 
-  console.log({ ifProd: ifProd(), ifDev: ifDev() })
-
   return {
     entry: {
-      main: resolve(__dirname, 'src', 'main.ts')
+      main: PATHS.entry
     },
     output: {
       filename: '[name].[hash].js',
-      path: resolve(__dirname, 'dist')
+      path: PATHS.output
     },
     mode: ifProd('production', 'development'),
     devtool: ifProd('source-map', 'inline-source-map'),
@@ -57,12 +76,12 @@ const config = (env) => {
     plugins: removeEmpty([
       new HtmlWebpackPlugin({
         title: 'React + TS',
-        template: resolve(__dirname, 'src/index.html')
+        template: PATHS.html
       }),
       ifDev(new webpack.NamedModulesPlugin()),
       ifDev(new webpack.HotModuleReplacementPlugin()),
       new ForkTsCheckerWebpackPlugin({
-        tsconfig: tsConfig,
+        tsconfig: PATHS.tsConfig,
         formatter: 'codeframe',
         checkSyntacticErrors: true,
         watch: ['./src']
