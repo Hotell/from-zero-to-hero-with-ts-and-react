@@ -22,7 +22,7 @@ const transform = /** @type {any} */ ({
 const config = {
   transform,
   testMatch: [
-    ...defaults.testMatch,
+    // ...defaults.testMatch,
     '**/__tests__/**/*.ts?(x)',
     '**/?(*.)+(spec|test).ts?(x)'
   ],

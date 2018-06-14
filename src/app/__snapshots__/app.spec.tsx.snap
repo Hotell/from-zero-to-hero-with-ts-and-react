@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mount rendering should match the snapshot 1`] = `
+<App>
+  <div
+    className="App"
+  >
+    <header
+      className="App-header"
+    >
+      <h1
+        className="App-title"
+      >
+        Welcome to React
+      </h1>
+      <h3
+        className="blue"
+      >
+        Everyone is Welcome!
+      </h3>
+    </header>
+    <p
+      className="App-intro"
+    >
+      Hello
+    </p>
+    <p
+      className="button-state"
+    >
+      No!
+    </p>
+    <button
+      onClick={[Function]}
+    >
+      Click
+    </button>
+    <h2 />
+    <input
+      onChange={[Function]}
+      type="text"
+    />
+    <p
+      className="lifeCycle"
+    >
+      componentDidMount
+    </p>
+  </div>
+</App>
+`;
+
+exports[`shallow rendering <App/> should match the snapshot 1`] = `
+<div
+  className="App"
+>
+  <header
+    className="App-header"
+  >
+    <h1
+      className="App-title"
+    >
+      Welcome to React
+    </h1>
+    <h3
+      className="blue"
+    >
+      Everyone is Welcome!
+    </h3>
+  </header>
+  <p
+    className="App-intro"
+  >
+    Hello
+  </p>
+  <p
+    className="button-state"
+  >
+    No!
+  </p>
+  <button
+    onClick={[Function]}
+  >
+    Click
+  </button>
+  <h2 />
+  <input
+    onChange={[Function]}
+    type="text"
+  />
+  <p
+    className="lifeCycle"
+  >
+    componentDidMount
+  </p>
+</div>
+`;
