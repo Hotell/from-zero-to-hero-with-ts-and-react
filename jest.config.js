@@ -10,17 +10,12 @@ const tsJestConfig = {
 }
 
 /**
- * @FIXME jest typings are bad, so we need to turn it off -> PR
- * https://github.com/DefinitelyTyped/DefinitelyTyped/pull/26304
- */
-const transform = /** @type {any} */ ({
-  '^.+\\.(ts|tsx)$': 'ts-jest'
-})
-/**
- * @type {Partial<jest.ProjectConfig>}
+ * @type {jest.InitialOptions}
  */
 const config = {
-  transform,
+  transform: {
+    '^.+\\.(ts|tsx)$': 'ts-jest'
+  },
   testMatch: [
     ...defaults.testMatch,
     '**/__tests__/**/*.ts?(x)',
