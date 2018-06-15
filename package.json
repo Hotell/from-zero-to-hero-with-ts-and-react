@@ -6,7 +6,8 @@
     "test": "jest",
     "validate:tools": "tsc -p tsconfig.tools.json",
     "format": "prettier \"**/**.{ts,tsx,js,jsx,md,css,scss,sass,less}\" --write",
-    "cleanup": "rm -rf dist out-tsc demo/dist demo/out-tsc"
+    "cleanup": "rm -rf dist out-tsc demo/dist demo/out-tsc",
+    "reset:demo-live": "rm -rf demo-live/{src,node_modules,webpack.config.js,tsconfig.json,package.json}"
   },
   "devDependencies": {
     "@types/enzyme": "3.1.10",
