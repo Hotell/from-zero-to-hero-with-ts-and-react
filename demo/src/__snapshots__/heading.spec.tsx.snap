@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Heading/> should assert via snapshot 1`] = `
+<h1>
+  React is great!
+</h1>
+`;
+
+exports[`<Heading/> should assert via snapshot 2`] = `
+<h1>
+  Foo Bar
+</h1>
+`;
