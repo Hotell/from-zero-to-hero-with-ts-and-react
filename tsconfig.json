@@ -65,6 +65,7 @@
   "exclude": [
     "node_modules",
     "dist",
-    "out-tsc"
+    "out-tsc",
+    "demo"
   ]
 }
