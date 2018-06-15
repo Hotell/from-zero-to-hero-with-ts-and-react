@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "target": "es5",
+    "module": "es2015",
+    "lib": [
+      "es2015",
+      "dom"
+    ],
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "jsx": "react",
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "outDir": "out-tsc"
+  },
+  "include": [
+    "."
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "out-tsc"
+  ]
+}
