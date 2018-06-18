@@ -3,28 +3,68 @@
 exports[`<App/> should render 1`] = `
 <App>
   <div>
-    <Component
+    <Heading
       message="Hello World"
+      type="h1"
     >
       <h1>
         Hello World
       </h1>
+    </Heading>
+    <Component>
+      <Counter>
+        <Heading
+          message="Simple Counter"
+          type="h2"
+        >
+          <h2>
+            Simple Counter
+          </h2>
+        </Heading>
+        <p>
+          0
+        </p>
+        <button
+          onClick={[Function]}
+        >
+          Increment
+        </button>
+        <button
+          onClick={[Function]}
+        >
+          Decrement
+        </button>
+      </Counter>
     </Component>
-    <Counter>
-      <p>
-        0
-      </p>
-      <button
-        onClick={[Function]}
-      >
-        Increment
-      </button>
-      <button
-        onClick={[Function]}
-      >
-        Decrement
-      </button>
-    </Counter>
+    <Component>
+      <Counter>
+        <Heading
+          message="Interval Counter"
+          type="h2"
+        >
+          <h2>
+            Interval Counter
+          </h2>
+        </Heading>
+        <Interval
+          count={0}
+          onInc={[Function]}
+        >
+          <div>
+            <b
+              className="interval-count"
+            >
+              0
+            </b>
+            <button
+              onClick={[Function]}
+            >
+              Stop
+            </button>
+          </div>
+        </Interval>
+      </Counter>
+    </Component>
   </div>
 </App>
 `;

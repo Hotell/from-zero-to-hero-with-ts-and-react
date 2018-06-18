@@ -24,9 +24,7 @@ const config = {
       }
     ]
   },
-  plugins: [
-    new HTMLWebpackPlugin({ template: resolve(__dirname, 'src/index.html') })
-  ]
+  plugins: [new HTMLWebpackPlugin({ template: resolve(__dirname, 'src/index.html') })]
 }
 
 module.exports = config
