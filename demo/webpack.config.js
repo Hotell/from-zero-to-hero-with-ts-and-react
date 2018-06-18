@@ -15,6 +15,10 @@ const config = {
   resolve: {
     extensions: ['.ts', '.tsx', '.js']
   },
+  devServer: {
+    // overlay: true,
+    stats: 'errors-only'
+  },
   module: {
     rules: [
       {

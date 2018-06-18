@@ -38,7 +38,8 @@ const devServer = {
   overlay: true,
   contentBase: PATHS.content,
   historyApiFallback: true,
-  hot: true
+  hot: true,
+  stats: 'errors-only'
 }
 
 /**

@@ -25,5 +25,7 @@ export declare namespace WebpackDevServer {
      * only errors & warns on hot reload
      */
     noInfo: boolean
+
+    stats: 'errors-only'
   }
 }
