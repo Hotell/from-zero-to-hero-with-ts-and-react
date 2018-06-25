@@ -4,7 +4,8 @@
     "module": "commonjs",
     "noEmit": true,
     "allowJs": true,
-    "checkJs": true
+    "checkJs": true,
+    "importHelpers": false
   },
   "include": [
     "webpack.config.js",
