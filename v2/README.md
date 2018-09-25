@@ -406,12 +406,80 @@ class App {
 
 `touch src/app/user-profile.tsx`
 
+1.  implement
+
 ```tsx
+import React, { Component } from 'react'
+
+import { GithubUser } from './models'
+
+type Props = { bio: GithubUser }
+export class UserProfile extends Component<Props> {
+  render() {
+    const { bio } = this.props
+
+    return (
+      <div>
+        {bio.avatar_url && <img src={bio.avatar_url} className="img-rounded img-responsive" />}
+
+        <ul>
+          {bio.name && <li>Name: {bio.name}</li>}
+          {bio.login && <li>Username: {bio.login}</li>}
+          {bio.email && <li>Email: {bio.email}</li>}
+          {bio.location && <li>Location: {bio.location}</li>}
+          {bio.company && <li>Company: {bio.company}</li>}
+          {bio.followers && <li>Followers: {bio.followers}</li>}
+          {bio.following && <li>Following: {bio.following}</li>}
+          {bio.public_repos && <li>Public Repos: {bio.public_repos}</li>}
+          {bio.blog && (
+            <li>
+              Blog: <a href={bio.blog}> {bio.blog}</a>
+            </li>
+          )}
+        </ul>
+      </div>
+    )
+  }
+}
 ```
 
 ### Phase 3.5 - implement UserRepos component
 
 `touch src/app/user-repos.tsx`
 
+1.  explain list rendering via `.map`
+
 ```tsx
+import React, { Component } from 'react'
+
+import { GithubUserRepo } from './models'
+
+type Props = { repos: GithubUserRepo[] }
+export class UserRepos extends Component<Props> {
+  render() {
+    const { repos } = this.props
+
+    return (
+      <div>
+        <h3 className="text-secondary">Repos</h3>
+        <section className="row">
+          {repos.map((repo) => (
+            <div key={repo.name} className="col sm-12 margin-bottom-large card">
+              <div className="card-body">
+                {repo.html_url && (
+                  <h4 className="card-title">
+                    <a href={repo.html_url}>{repo.name}</a>
+                  </h4>
+                )}
+                {repo.description && <p className="card-text">{repo.description}</p>}
+              </div>
+            </div>
+          ))}
+        </section>
+      </div>
+    )
+  }
+}
 ```
+
+### Phase 3.6 - Refactor httpClient outside the component

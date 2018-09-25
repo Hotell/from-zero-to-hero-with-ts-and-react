@@ -10,7 +10,7 @@ const httpClient = new HttpClient('https://api.github.com')
 
 type Data = {
   bio: GithubUser
-  repos: GithubUserRepo
+  repos: GithubUserRepo[]
 } | null
 
 const initialState = {
@@ -24,10 +24,10 @@ type Props = {}
 export class App extends Component<Props, State> {
   readonly state = initialState
   private fetchUser = (username: string) => {
-    this.setState({ loading: true, error: null })
+    this.setState({ ...initialState, loading: true })
 
     const userData = httpClient.get<GithubUser>(`users/${username}`)
-    const userRepos = httpClient.get<GithubUserRepo>(`users/${username}/repos`)
+    const userRepos = httpClient.get<GithubUserRepo[]>(`users/${username}/repos`)
 
     const result = Promise.all([userData, userRepos]).then(([bio, repos]) => {
       return { bio, repos }
