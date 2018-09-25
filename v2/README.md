@@ -4,7 +4,7 @@
 
 1.  What is React
 2.  What is TypeScript
-3.  What are we gonna build ( explain architecture )=
+3.  What are we gonna build ( explain architecture )
 4.  Hands down, chin up!
 5.  Recap and finish him!
 
@@ -52,6 +52,10 @@ export interface GithubUser {
 }
 ```
 
+## Architecture
+
+![app tree](./App-tree.jpg)
+
 ## Code session
 
 ## Phase 1
@@ -82,14 +86,14 @@ And tweak config to:
     "lib": ["dom", "es2015"],
     "jsx": "react",
     "sourceMap": true,
-    "outDir": "./ts-out",
+    "outDir": "./out-tsc",
 
     /* Strict Type-Checking Options */
     "strict": true,
 
     /* Module Resolution Options */
     "moduleResolution": "node",
-    // "allowSyntheticDefaultImports": true,
+    "allowSyntheticDefaultImports": true,
     "esModuleInterop": true
   },
   "include": ["./src"]
