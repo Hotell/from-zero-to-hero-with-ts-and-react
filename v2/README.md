@@ -55,7 +55,7 @@ And tweak config to:
 4.  initialize code structure
 
 ```sh
-mkdir src && touch src/{index.html,main.ts}
+mkdir src && touch src/{index.html,main.ts,styles.css}
 ```
 
 **index.html**
@@ -131,12 +131,12 @@ bootstrap()
 
 ## Phase 2 - React
 
+1.  Create root component and render it to DOM
+
 ```sh
 mkdir src/app &&
 touch src/app/app.tsx
 ```
-
-Create root component and render it to DOM
 
 **app.tsx**
 
@@ -150,7 +150,7 @@ export class App extends Component {
 }
 ```
 
-mount React tree
+2.  mount React tree
 
 **main.ts**
 
@@ -170,4 +170,248 @@ const bootstrap = () => {
 bootstrap()
 ```
 
-- Explain what just happened
+3.  Explain what just happened
+
+## Phase 3 - Build the app
+
+### Phase 3.1 - Build search component
+
+`touch src/app/search.tsx`
+
+1.  build initial Search
+
+```tsx
+import React, { Component, ChangeEvent, FormEvent } from 'react'
+
+const initialState = { search: '' }
+type State = Readonly<typeof initialState>
+type Props = {}
+export class Search extends Component<Props, State> {
+  readonly state = initialState
+
+  private handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    this.setState({ search: event.target.value })
+  }
+
+  private handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    console.log(this.state)
+  }
+
+  render() {
+    const { search } = this.state
+
+    return (
+      <form className="paper" onSubmit={this.handleSubmit}>
+        <div className="form-group">
+          <input
+            type="search"
+            placeholder="Search..."
+            className="input-block"
+            value={search}
+            onChange={this.handleChange}
+          />
+        </div>
+      </form>
+    )
+  }
+}
+```
+
+2.  define props and clean state on submit
+
+```tsx
+type Props = {
+  onSearch: (username: string) => void
+}
+
+class Search {
+  private handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    console.log('SUBMITTING!')
+
+    this.props.onSearch(this.state.search)
+    this.setState(initialState)
+  }
+}
+```
+
+Explain what happened
+
+### Phase 3.2 - Build initial Profile component
+
+`touch src/app/profile.tsx`
+
+1.  initial implementation
+
+```tsx
+import React, { Component } from 'react'
+
+import { GithubUser, GithubUserRepo } from './models'
+
+type Props = {
+  data: { bio: GithubUser; repos: GithubUserRepo }
+}
+export class Profile extends Component<Props> {
+  render() {
+    const { bio, repos } = this.props.data
+    return (
+      <div className="row">
+        <div className="col sm-12 md-6">
+          Todo...
+          <pre>{JSON.stringify(bio, null, 2)}</pre>
+        </div>
+        <div className="col sm-12 md-6">
+          Todo...
+          <pre>{JSON.stringify(repos, null, 2)}</pre>
+        </div>
+      </div>
+    )
+  }
+}
+```
+
+2.  update app.tsx
+
+```tsx
+class App {
+  render() {
+    return (
+      <div className="container margin">
+        <h1>Github Users search</h1>
+        <Search onSearch={console.log} />
+        <Profile data={{ bio: {} as any, repos: {} as any }} />
+      </div>
+    )
+  }
+}
+```
+
+3.  build generic Debug component to encapsulate json.stringify
+
+**debug.tsx**
+
+```tsx
+import React from 'react'
+
+type Props<T> = { data: T }
+export const Debug = <T extends {}>(props: Props<T>) => (
+  <pre>{JSON.stringify(props.data, null, 2)}</pre>
+)
+```
+
+### Phase 3.3 - Fetch real data from App
+
+1.  install Axios and create api.service
+
+`yarn add axios`
+
+**api.service.ts**
+
+```tsx
+import axios, { AxiosInstance, AxiosError } from 'axios'
+
+export class HttpClient {
+  private provider: AxiosInstance
+  constructor(baseURL: string) {
+    this.provider = axios.create({ baseURL })
+  }
+
+  get<T>(url: string): Promise<T> {
+    return this.provider
+      .get(url)
+      .then((response) => response.data)
+      .catch((reason: AxiosError) => {
+        const error = reason.response ? reason.response.data : reason.response
+
+        throw error
+      })
+  }
+}
+```
+
+2.  create httpClient instance and implement `fetchUser` method
+
+**app.tsx**
+
+```tsx
+import { HttpClient } from './api.service'
+
+const httpClient = new HttpClient('https://api.github.com')
+
+type Data = {
+  bio: GithubUser
+  repos: GithubUserRepo
+} | null
+
+const initialState = {
+  data: null as Data,
+  loading: false,
+  error: null as object | null
+}
+type State = Readonly<typeof initialState>
+type Props = {}
+
+export class App extends Component<Props, State> {
+  readonly state = initialState
+  private fetchUser = (username: string) => {
+    this.setState({ loading: true, error: null })
+
+    const userData = httpClient.get<GithubUser>(`users/${username}`)
+    const userRepos = httpClient.get<GithubUserRepo>(`users/${username}/repos`)
+
+    const result = Promise.all([userData, userRepos]).then(([bio, repos]) => {
+      return { bio, repos }
+    })
+
+    result
+      .then((data) => {
+        this.setState({ data, loading: false })
+      })
+      .catch((reason) => {
+        console.log({ reason })
+        this.setState({ loading: false, error: reason, data: null })
+      })
+  }
+}
+```
+
+3.  update render to leverage state data and if/else conditional logic
+
+**app.tsx**
+
+```tsx
+class App {
+  render() {
+    const { data, loading, error } = this.state
+
+    return (
+      <div className="container margin">
+        <h1>Github Users search</h1>
+        <Search onSearch={this.fetchUser} />
+        {loading ? 'Loading user...' : null}
+        {error ? (
+          <p className="text-error">
+            Oh no panic! <Debug data={error} />
+          </p>
+        ) : null}
+        {data ? <Profile data={data} /> : null}
+      </div>
+    )
+  }
+}
+```
+
+### Phase 3.4 - implement UserProfile component
+
+`touch src/app/user-profile.tsx`
+
+```tsx
+```
+
+### Phase 3.5 - implement UserRepos component
+
+`touch src/app/user-repos.tsx`
+
+```tsx
+```
