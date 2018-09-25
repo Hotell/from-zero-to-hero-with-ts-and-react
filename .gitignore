@@ -69,3 +69,5 @@ dist
 
 # Serverless directories
 .serverless
+
+.cache
