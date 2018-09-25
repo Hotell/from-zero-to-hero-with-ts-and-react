@@ -5,16 +5,16 @@ import { render } from 'react-dom'
 import { createElement } from 'react'
 
 import { App } from './app/app'
+import { HttpClient } from './app/api.service'
+import { UserService } from './app/user.service'
 
 const bootstrap = () => {
   const mountTo = document.getElementById('app') as HTMLDivElement
-  // const app = document.createElement('div')
-  // app.innerHTML = 'IT WORKS !!!'
-  // app.className = 'container margin'
 
-  // mountTo.appendChild(app)
+  const httpClient = new HttpClient('https://api.github.com')
+  const userService = new UserService(httpClient)
 
-  render(createElement(App), mountTo)
+  render(createElement(App, { userService }), mountTo)
 }
 
 bootstrap()

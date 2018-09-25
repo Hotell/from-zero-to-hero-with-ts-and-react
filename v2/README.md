@@ -482,4 +482,83 @@ export class UserRepos extends Component<Props> {
 }
 ```
 
-### Phase 3.6 - Refactor httpClient outside the component
+### Phase 3.6 - Refactor httpClient outside the component and implement userService
+
+1.  extract httpClient to props
+
+2.  create UserService and pass it to App via props
+
+**user.service.ts**
+
+```ts
+import { HttpClient } from './api.service'
+import { GithubUser, GithubUserRepo } from './models'
+
+export class UserService {
+  constructor(private httpClient: HttpClient) {}
+
+  getUser(username: string) {
+    return this.httpClient.get<GithubUser>(`users/${username}`)
+  }
+
+  getRepos(username: string) {
+    return this.httpClient.get<GithubUserRepo[]>(`users/${username}/repos`)
+  }
+
+  getProfile(username: string) {
+    return Promise.all([this.getUser(username), this.getRepos(username)]).then(([bio, repos]) => {
+      return { bio, repos }
+    })
+  }
+}
+```
+
+**main.ts**
+
+```ts
+const bootstrap = () => {
+  const mountTo = document.getElementById('app') as HTMLDivElement
+
+  const httpClient = new HttpClient('https://api.github.com')
+  const userService = new UserService(httpClient)
+
+  render(createElement(App, { userService }), mountTo)
+}
+```
+
+**app.tsx**
+
+```tsx
+const initialState = {
+  data: null as Data,
+  loading: false,
+  error: null as object | null
+}
+type State = Readonly<typeof initialState>
+type Props = { userService: UserService }
+
+export class App extends Component<Props, State> {
+  readonly state = initialState
+  private fetchUser = (username: string) => {
+    const { userService } = this.props
+
+    this.setState({ ...initialState, loading: true })
+
+    userService
+      .getProfile(username)
+      .then((data) => {
+        this.setState({ data, loading: false })
+      })
+      .catch((reason) => {
+        console.log({ reason })
+        this.setState({ loading: false, error: reason, data: null })
+      })
+  }
+}
+```
+
+### Phase 4 - Introducing Provider pattern ( DI and context)
+
+### Phase 5 - Unit testing our app
+
+### Phase 6 - E2E testing our app

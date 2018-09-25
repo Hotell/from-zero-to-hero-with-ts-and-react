@@ -2,11 +2,9 @@ import React, { Component } from 'react'
 
 import { Search } from './search'
 import { Profile } from './profile'
-import { HttpClient } from './api.service'
 import { GithubUser, GithubUserRepo } from './models'
 import { Debug } from './debug'
-
-const httpClient = new HttpClient('https://api.github.com')
+import { UserService } from './user.service'
 
 type Data = {
   bio: GithubUser
@@ -19,21 +17,17 @@ const initialState = {
   error: null as object | null
 }
 type State = Readonly<typeof initialState>
-type Props = {}
+type Props = { userService: UserService }
 
 export class App extends Component<Props, State> {
   readonly state = initialState
   private fetchUser = (username: string) => {
+    const { userService } = this.props
+
     this.setState({ ...initialState, loading: true })
 
-    const userData = httpClient.get<GithubUser>(`users/${username}`)
-    const userRepos = httpClient.get<GithubUserRepo[]>(`users/${username}/repos`)
-
-    const result = Promise.all([userData, userRepos]).then(([bio, repos]) => {
-      return { bio, repos }
-    })
-
-    result
+    userService
+      .getProfile(username)
       .then((data) => {
         this.setState({ data, loading: false })
       })
