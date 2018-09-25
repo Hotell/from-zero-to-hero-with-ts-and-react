@@ -169,7 +169,7 @@ const bootstrap = () => {
   const mountTo = document.getElementById('app') as HTMLDivElement
   const app = document.createElement('div')
   app.innerHTML = 'IT WORKS !!!'
-  app.className = 'container margin'
+  app.className = 'container'
 
   mountTo.appendChild(app)
 }
@@ -193,7 +193,7 @@ import React, { Component } from 'react'
 
 export class App extends Component {
   render() {
-    return <div className="container margin">It Works !!!</div>
+    return <div className="container">It Works !!!</div>
   }
 }
 ```
@@ -298,7 +298,7 @@ import React, { Component } from 'react'
 import { GithubUser, GithubUserRepo } from './models'
 
 type Props = {
-  data: { bio: GithubUser; repos: GithubUserRepo }
+  data: { bio: GithubUser; repos: GithubUserRepo[] }
 }
 export class Profile extends Component<Props> {
   render() {

@@ -41,7 +41,7 @@ export class App extends Component<Props, State> {
     const { data, loading, error } = this.state
 
     return (
-      <div className="container margin">
+      <div className="container">
         <h1>Github Users search</h1>
         <Search onSearch={this.fetchUser} />
         {loading ? 'Loading user...' : null}
