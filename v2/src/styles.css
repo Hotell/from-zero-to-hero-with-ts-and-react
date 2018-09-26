@@ -1,0 +1,8 @@
+.text-error {
+  color: red;
+}
+
+pre {
+  overflow: scroll;
+  max-height: 150px;
+}
