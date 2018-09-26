@@ -8,6 +8,12 @@
 4.  Hands down, chin up!
 5.  Recap and finish him!
 
+## Links
+
+- [Intro Slides](https://docs.google.com/presentation/d/e/2PACX-1vSu5B4Q-3qxcvsQ7HauMAqJmlpQr_cPCU69LnVZxIvl4nze6uhR3UzL8mHzFYnWlLoGOht5Ugz1lOhS/pub?start=false&loop=false&delayms=3000)
+- [React + TS blogposts](https://medium.com/@martin_hotell/latest)
+- [Building a company around TypeScript](https://medium.com/ionic-and-the-mobile-web/building-a-company-around-typescript-5301aaf42007)
+
 ## API types:
 
 ```ts

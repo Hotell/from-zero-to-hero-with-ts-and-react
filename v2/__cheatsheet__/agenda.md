@@ -292,7 +292,7 @@ type Data = {
 const initialState = {
   data: null as Data,
   loading: false,
-  error: null as object | null,
+  error: null as object | null
 }
 type State = Readonly<typeof initialState>
 type Props = {}
@@ -310,10 +310,10 @@ export class App extends Component<Props, State> {
     })
 
     result
-      .then(data => {
+      .then((data) => {
         this.setState({ data, loading: false })
       })
-      .catch(reason => {
+      .catch((reason) => {
         console.log({ reason })
         this.setState({ loading: false, error: reason, data: null })
       })
@@ -365,9 +365,7 @@ export class UserProfile extends Component<Props> {
 
     return (
       <div>
-        {bio.avatar_url && (
-          <img src={bio.avatar_url} className="img-rounded img-responsive" />
-        )}
+        {bio.avatar_url && <img src={bio.avatar_url} className="img-rounded img-responsive" />}
 
         <ul>
           {bio.name && <li>Name: {bio.name}</li>}
@@ -410,7 +408,7 @@ export class UserRepos extends Component<Props> {
       <div>
         <h3 className="text-secondary">Repos</h3>
         <section className="row">
-          {repos.map(repo => (
+          {repos.map((repo) => (
             <div key={repo.name} className="col sm-12 margin-bottom-large card">
               <div className="card-body">
                 {repo.html_url && (
@@ -418,9 +416,7 @@ export class UserRepos extends Component<Props> {
                     <a href={repo.html_url}>{repo.name}</a>
                   </h4>
                 )}
-                {repo.description && (
-                  <p className="card-text">{repo.description}</p>
-                )}
+                {repo.description && <p className="card-text">{repo.description}</p>}
               </div>
             </div>
           ))}
@@ -458,7 +454,7 @@ const bootstrap = () => {
 const initialState = {
   data: null as Data,
   loading: false,
-  error: null as object | null,
+  error: null as object | null
 }
 type State = Readonly<typeof initialState>
 type Props = { userService: UserService }
@@ -472,10 +468,10 @@ export class App extends Component<Props, State> {
 
     userService
       .getProfile(username)
-      .then(data => {
+      .then((data) => {
         this.setState({ data, loading: false })
       })
-      .catch(reason => {
+      .catch((reason) => {
         console.log({ reason })
         this.setState({ loading: false, error: reason, data: null })
       })
