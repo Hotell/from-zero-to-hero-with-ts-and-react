@@ -254,7 +254,7 @@ class App {
 }
 ```
 
-3.  build generic Debug component to encapsulate json.stringify
+3.  build generic Debug component to encapsulate JSON.stringify
 
 **debug.tsx**
 
