@@ -709,3 +709,80 @@ describe(`Search`, () => {
 ```
 
 ### Phase 6 - E2E testing our app
+
+1.  install testcafe
+
+`yarn add -D testcafe`
+
+2.  initialize e2e folder structure
+
+`mkdir e2e && mkdir e2e/{tests,pages}`
+`touch e2e/tsconfig.json`
+
+**tsconfig.json:**
+
+```json
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true
+  }
+}
+```
+
+`touch e2e/pages/app.po.ts`
+
+```ts
+import { Selector } from 'testcafe'
+
+export class AppPage {
+  private root = Selector('.container')
+  heading = Selector('h1')
+  loading = Selector(`[data-test-id="loading"]`)
+  profile = Selector(`[data-test-id="profile"]`)
+  error = Selector(`[data-test-id="error"]`)
+}
+```
+
+`touch e2e/tests/app.test-e2e.ts`
+
+```ts
+import { AppPage } from '../pages'
+
+const appPage = new AppPage()
+
+fixture`App page`.page('localhost:1234')
+
+test('Should successfully find user by name "hotell"', async (t) => {
+  await t.setTestSpeed(0.5)
+
+  await t.expect(appPage.heading.textContent).eql('Github Users search')
+
+  const searchInput = appPage.search.find('input')
+
+  await t.typeText(searchInput, 'hotell').pressKey('enter')
+
+  await t
+    .expect(appPage.profile.exists)
+    .ok()
+    .expect(appPage.profile.innerText)
+    .contains('Name: Martin Hochel')
+})
+```
+
+3.  Add npm script
+
+```json
+{
+  "scripts": {
+    "test-e2e": "testcafe chrome e2e/tests"
+  }
+}
+```
+
+4.  Execute e2e tests against running app
+
+```sh
+yarn start & \
+yarn test-e2e
+```

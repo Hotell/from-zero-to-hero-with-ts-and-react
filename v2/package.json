@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "start": "parcel src/index.html",
-    "test": "jest --watch"
+    "test": "jest --watch",
+    "test-e2e": "testcafe chrome ./e2e/tests"
   },
   "dependencies": {
     "@types/react": "16.4.14",
@@ -24,6 +25,7 @@
     "enzyme-adapter-react-16": "1.5.0",
     "jest": "23.6.0",
     "parcel-bundler": "1.10.0",
+    "testcafe": "0.22.0",
     "ts-jest": "23.10.3",
     "typescript": "3.0.3"
   }

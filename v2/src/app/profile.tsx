@@ -12,7 +12,7 @@ export class Profile extends Component<Props> {
   render() {
     const { bio, repos } = this.props.data
     return (
-      <div className="row">
+      <div data-test-id="profile" className="row">
         <div className="col sm-12 md-6">
           <UserProfile bio={bio} />
         </div>

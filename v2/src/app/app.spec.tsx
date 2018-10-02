@@ -3,7 +3,6 @@ import React from 'react'
 
 import { HttpClient } from './api.service'
 import { App, Data } from './app'
-import { GithubUser, GithubUserRepo } from './models'
 import { Profile } from './profile'
 import { Search } from './search'
 import { UserService } from './user.service'

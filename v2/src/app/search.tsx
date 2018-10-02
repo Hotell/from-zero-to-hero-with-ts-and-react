@@ -24,7 +24,7 @@ export class Search extends Component<Props, State> {
     const { search } = this.state
 
     return (
-      <form className="paper" onSubmit={this.handleSubmit}>
+      <form data-test-id="search" className="paper" onSubmit={this.handleSubmit}>
         <div className="form-group">
           <input
             type="search"
