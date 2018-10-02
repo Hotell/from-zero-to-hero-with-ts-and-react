@@ -341,7 +341,7 @@ class App {
 }
 ```
 
-3.  build generic Debug component to encapsulate json.stringify
+3.  build generic Debug component to encapsulate JSON.stringify
 
 **debug.tsx**
 
@@ -614,5 +614,98 @@ export class App extends Component<Props, State> {
 ### Phase 4 - Introducing Provider pattern ( DI and context)
 
 ### Phase 5 - Unit testing our app
+
+1.  install and config jest
+
+`yarn add -D jest @types/jest ts-jest`
+
+`yarn ts-jest config:init`
+
+OR
+
+`touch jest.config.js`
+
+```js
+// @ts-check
+
+/**
+ * @type {jest.InitialOptions}
+ */
+const config = {
+  preset: 'ts-jest',
+  setupTestFrameworkScriptFile: '<rootDir>/src/setup-tests.ts'
+}
+
+module.exports = config
+```
+
+- add test script to package.json
+
+`{"scripts":{"test": "jest --watch"}}`
+
+Now write initial test for search.
+
+**search.spec.tsx**
+
+```tsx
+describe(`Search`, () => {
+  it(`should work`, () => {
+    expect(1).toBe(1)
+  })
+})
+```
+
+2.  add enzyme
+
+`yarn add -D enzyme enzyme-adapter-react-16 @types/{enzyme,enzyme-adapter-react-16}`
+
+`touch src/setup-tests.ts`
+
+**setup-tests.ts**
+
+```ts
+// setup file
+import { configure } from 'enzyme'
+import Adapter from 'enzyme-adapter-react-16'
+
+// const { configure } = require('enzyme')
+// const Adapter = require('enzyme-adapter-react-16')
+
+configure({ adapter: new Adapter() })
+```
+
+3.  write Search test
+
+```tsx
+import React from 'react'
+import { mount } from 'enzyme'
+
+import { Search } from './search'
+
+describe(`Search`, () => {
+  it(`should emit searchTerm string on submit`, () => {
+    const onSearchSpy = jest.fn()
+    const wrapper = mount<Search>(<Search onSearch={onSearchSpy} />)
+
+    const input = wrapper.find('input[type="search"]')
+
+    expect(input.exists()).toBeTruthy()
+
+    expect(wrapper.state().search).toBe('')
+
+    input.simulate('change', { target: { value: 'hotell' } })
+
+    expect(wrapper.state().search).toBe('hotell')
+
+    wrapper.simulate('submit')
+
+    expect(onSearchSpy).toBeCalledWith('hotell')
+
+    expect(wrapper.state('search')).toBe('')
+
+    wrapper.unmount()
+  })
+})
+```
 
 ### Phase 6 - E2E testing our app

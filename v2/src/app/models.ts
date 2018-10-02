@@ -6,7 +6,7 @@ export interface GithubUserRepo {
 
 export interface GithubUser {
   login: string
-  id: 1
+  id: string
   node_id: string
   avatar_url: string
   gravatar_id: string
@@ -22,13 +22,13 @@ export interface GithubUser {
   events_url: string
   received_events_url: string
   type: string
-  site_admin: false
+  site_admin: boolean
   name: string
-  company: string
+  company: string | null
   blog: string
   location: string
-  email: string
-  hireable: false
+  email: string | null
+  hireable: boolean
   bio: string
   public_repos: number
   public_gists: number

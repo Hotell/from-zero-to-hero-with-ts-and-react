@@ -5,7 +5,8 @@
   "author": "Martin Hochel <hochelmartin@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "parcel src/index.html"
+    "start": "parcel src/index.html",
+    "test": "jest --watch"
   },
   "dependencies": {
     "@types/react": "16.4.14",
@@ -16,7 +17,14 @@
     "react-dom": "16.5.2"
   },
   "devDependencies": {
+    "@types/enzyme": "3.1.14",
+    "@types/enzyme-adapter-react-16": "1.0.3",
+    "@types/jest": "23.3.2",
+    "enzyme": "3.6.0",
+    "enzyme-adapter-react-16": "1.5.0",
+    "jest": "23.6.0",
     "parcel-bundler": "1.10.0",
+    "ts-jest": "23.10.3",
     "typescript": "3.0.3"
   }
 }

@@ -6,13 +6,13 @@ import { GithubUser, GithubUserRepo } from './models'
 import { Debug } from './debug'
 import { UserService } from './user.service'
 
-type Data = {
+export type Data = {
   bio: GithubUser
   repos: GithubUserRepo[]
-} | null
+}
 
 const initialState = {
-  data: null as Data,
+  data: null as Data | null,
   loading: false,
   error: null as object | null
 }
@@ -44,9 +44,9 @@ export class App extends Component<Props, State> {
       <div className="container">
         <h1>Github Users search</h1>
         <Search onSearch={this.fetchUser} />
-        {loading ? 'Loading user...' : null}
+        {loading ? <p data-test-id="loading">Loading user...</p> : null}
         {error ? (
-          <p className="text-error">
+          <p data-test-id="error" className="text-error">
             Oh no panic! <Debug data={error} />
           </p>
         ) : null}
