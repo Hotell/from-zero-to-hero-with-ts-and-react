@@ -1,13 +1,13 @@
 import React, { SFC } from 'react'
-import { createPropsGetter } from './utils'
+import { createPropsGetter, DefaultProps } from '@martin_hotell/rex-tils'
 
 export type Props = {
   message: string
-} & Partial<typeof defaultProps>
+} & DefaultProps<typeof defaultProps>
 
-const defaultProps = {
+const defaultProps = DefaultProps({
   type: 'h1' as 'h1' | 'h2' | 'h3' | 'h4'
-}
+})
 const getProps = createPropsGetter(defaultProps)
 
 export const Heading: SFC<Props> = (props) => {

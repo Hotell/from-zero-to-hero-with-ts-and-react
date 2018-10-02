@@ -11,7 +11,7 @@ describe(`<Heading/>`, () => {
   })
 
   it(`should assert via snapshot`, () => {
-    const wrapper = shallow<Props>(<Heading message="React is great!" />)
+    const wrapper = shallow<Heading>(<Heading message="React is great!" />)
 
     expect(wrapper).toMatchSnapshot()
 
@@ -21,7 +21,7 @@ describe(`<Heading/>`, () => {
   })
 
   it(`should render various h tags based on type prop`, () => {
-    const wrapper = shallow<Props>(<Heading message="React is great!" />)
+    const wrapper = shallow<Heading>(<Heading message="React is great!" />)
 
     expect(wrapper.find('h1').length).toBe(1)
 
