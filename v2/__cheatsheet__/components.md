@@ -43,7 +43,9 @@ export class Search extends Component<Props, State> {
 }
 ```
 
-### initial profile.tsx
+### profile.tsx
+
+> initial
 
 ```tsx
 import React, { Component } from 'react'
@@ -86,9 +88,7 @@ export class UserProfile extends Component<Props> {
 
     return (
       <div>
-        {bio.avatar_url && (
-          <img src={bio.avatar_url} className="img-rounded img-responsive" />
-        )}
+        {bio.avatar_url && <img src={bio.avatar_url} className="img-rounded img-responsive" />}
 
         <ul>
           {bio.name && <li>Name: {bio.name}</li>}
@@ -127,7 +127,7 @@ export class UserRepos extends Component<Props> {
       <div>
         <h3 className="text-secondary">Repos</h3>
         <section className="row">
-          {repos.map(repo => (
+          {repos.map((repo) => (
             <div key={repo.name} className="col sm-12 margin-bottom-large card">
               <div className="card-body">
                 {repo.html_url && (
@@ -135,9 +135,7 @@ export class UserRepos extends Component<Props> {
                     <a href={repo.html_url}>{repo.name}</a>
                   </h4>
                 )}
-                {repo.description && (
-                  <p className="card-text">{repo.description}</p>
-                )}
+                {repo.description && <p className="card-text">{repo.description}</p>}
               </div>
             </div>
           ))}
@@ -148,7 +146,6 @@ export class UserRepos extends Component<Props> {
 }
 ```
 
-
 ## debug.tsx
 
 ```tsx
@@ -158,5 +155,4 @@ type Props<T> = { data: T }
 export const Debug = <T extends {}>(props: Props<T>) => (
   <pre>{JSON.stringify(props.data, null, 2)}</pre>
 )
-
 ```
