@@ -8,10 +8,11 @@ export class HttpClient {
   constructor(baseURL: string) {
     this.provider = axios.create({ baseURL })
   }
+
   get<T>(url: string): Promise<T> {
     return this.provider
       .get(url)
-      .then(response => response.data)
+      .then((response) => response.data)
       .catch((reason: AxiosError) => {
         const error = reason.response ? reason.response.data : reason.response
 
@@ -39,11 +40,9 @@ export class UserService {
   }
 
   getProfile(username: string) {
-    return Promise.all([this.getUser(username), this.getRepos(username)]).then(
-      ([bio, repos]) => {
-        return { bio, repos }
-      }
-    )
+    return Promise.all([this.getUser(username), this.getRepos(username)]).then(([bio, repos]) => {
+      return { bio, repos }
+    })
   }
 }
 ```

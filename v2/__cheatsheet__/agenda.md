@@ -286,11 +286,11 @@ const httpClient = new HttpClient('https://api.github.com')
 
 type Data = {
   bio: GithubUser
-  repos: GithubUserRepo
-} | null
+  repos: GithubUserRepo[]
+}
 
 const initialState = {
-  data: null as Data,
+  data: null as Data | null,
   loading: false,
   error: null as object | null
 }
@@ -303,7 +303,7 @@ export class App extends Component<Props, State> {
     this.setState({ loading: true, error: null })
 
     const userData = httpClient.get<GithubUser>(`users/${username}`)
-    const userRepos = httpClient.get<GithubUserRepo>(`users/${username}/repos`)
+    const userRepos = httpClient.get<GithubUserRepo[]>(`users/${username}/repos`)
 
     const result = Promise.all([userData, userRepos]).then(([bio, repos]) => {
       return { bio, repos }
@@ -334,7 +334,7 @@ class App {
       <div className="container margin">
         <h1>Github Users search</h1>
         <Search onSearch={this.fetchUser} />
-        {loading ? 'Loading user...' : null}
+        {loading ? <p>Loading user...</p> : null}
         {error ? (
           <p className="text-error">
             Oh no panic! <Debug data={error} />
