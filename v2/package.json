@@ -7,7 +7,7 @@
   "scripts": {
     "start": "parcel src/index.html",
     "test": "jest --watch",
-    "test-e2e": "testcafe chrome ./e2e/tests"
+    "test-e2e": "testcafe chrome ./e2e/tests -a 'yarn start'"
   },
   "dependencies": {
     "@types/react": "16.4.14",

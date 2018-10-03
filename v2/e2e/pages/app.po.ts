@@ -1,10 +1,11 @@
 import { Selector } from 'testcafe'
 
+import { select } from '../utils'
+
 export class AppPage {
-  private root = Selector('.container')
   heading = Selector('h1')
-  search = Selector(`[data-test-id="search"]`)
-  loading = Selector(`[data-test-id="loading"]`)
-  profile = Selector(`[data-test-id="profile"]`)
-  error = Selector(`[data-test-id="error"]`)
+  search = Selector(select('search'))
+  loading = Selector(select('loading'))
+  profile = Selector(select('profile'))
+  error = Selector(select('error'))
 }

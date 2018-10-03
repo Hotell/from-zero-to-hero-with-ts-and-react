@@ -6,6 +6,7 @@
 const config = {
   preset: 'ts-jest',
   // testEnvironment: 'node',
+  testPathIgnorePatterns: ['out-tsc'],
   setupTestFrameworkScriptFile: '<rootDir>/src/setup-tests.ts'
 }
 
