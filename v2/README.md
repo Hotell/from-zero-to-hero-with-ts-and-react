@@ -62,7 +62,9 @@ export interface GithubUser {
 
 ![app tree](./App-tree.jpg)
 
-## Code session
+---
+
+# Code session
 
 ## Phase 1
 
@@ -80,7 +82,7 @@ yarn add -D typescript parcel-bundler
 
 3.  initialize TypeScript
 
-`yarn tsc --init`
+`yarn tsc --init --outDir dist --sourceMap --jsx react --module ESNext --lib dom,es2015 --moduleResolution node --forceConsistentCasingInFileNames --skipLibCheck`
 
 And tweak config to:
 
@@ -99,7 +101,6 @@ And tweak config to:
 
     /* Module Resolution Options */
     "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true,
     "esModuleInterop": true
   },
   "include": ["./src"]
@@ -126,8 +127,8 @@ mkdir src && touch src/{index.html,main.ts,styles.css}
 </head>
 
 <body>
-  <div id="app"></div>
-  <script src="main.ts"></script>
+  <div id="root"></div>
+  <script src="./main.ts"></script>
 </body>
 
 </html>
@@ -137,7 +138,7 @@ mkdir src && touch src/{index.html,main.ts,styles.css}
 
 ```ts
 const bootstrap = () => {
-  const mountTo = document.getElementById('app') as HTMLDivElement
+  const mountTo = document.getElementById('root') as HTMLDivElement
   const app = document.createElement('div')
   app.innerHTML = 'IT WORKS !!!'
 
@@ -166,10 +167,21 @@ bootstrap()
 
 `yarn add papercss`
 
+**styles.css**
+
+```css
+@import 'papercss/dist/paper.min.css';
+
+pre {
+  overflow: scroll;
+  max-height: 150px;
+}
+```
+
 **main.ts**
 
 ```ts
-import 'papercss/dist/paper.css'
+import './styles.css'
 
 const bootstrap = () => {
   const mountTo = document.getElementById('app') as HTMLDivElement
@@ -209,7 +221,7 @@ export class App extends Component {
 **main.ts**
 
 ```tsx
-import 'papercss/dist/paper.css'
+import './styles.css'
 
 import { render } from 'react-dom'
 import { createElement } from 'react'
@@ -396,10 +408,10 @@ const httpClient = new HttpClient('https://api.github.com')
 type Data = {
   bio: GithubUser
   repos: GithubUserRepo
-} | null
+}
 
 const initialState = {
-  data: null as Data,
+  data: null as Data | null,
   loading: false,
   error: null as object | null
 }
@@ -668,9 +680,6 @@ describe(`Search`, () => {
 import { configure } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 
-// const { configure } = require('enzyme')
-// const Adapter = require('enzyme-adapter-react-16')
-
 configure({ adapter: new Adapter() })
 ```
 
@@ -717,6 +726,7 @@ describe(`Search`, () => {
 2.  initialize e2e folder structure
 
 `mkdir e2e && mkdir e2e/{tests,pages}`
+
 `touch e2e/tsconfig.json`
 
 **tsconfig.json:**

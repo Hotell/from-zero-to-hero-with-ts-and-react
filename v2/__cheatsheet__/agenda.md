@@ -50,7 +50,7 @@ mkdir src && touch src/{index.html,main.ts,styles.css}
 
 ```ts
 const bootstrap = () => {
-  const mountTo = document.getElementById('app') as HTMLDivElement
+  const mountTo = document.getElementById('root') as HTMLDivElement
   const app = document.createElement('div')
   app.innerHTML = 'IT WORKS !!!'
 

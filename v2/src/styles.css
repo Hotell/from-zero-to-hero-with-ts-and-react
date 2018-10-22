@@ -1,6 +1,4 @@
-.text-error {
-  color: red;
-}
+@import 'papercss/dist/paper.min.css';
 
 pre {
   overflow: scroll;

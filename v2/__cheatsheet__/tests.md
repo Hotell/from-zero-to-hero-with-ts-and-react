@@ -17,7 +17,7 @@ yarn add -D jest ts-jest enzyme enzyme-adapter-react-16 @types/{jest,enzyme,enzy
 const config = {
   preset: 'ts-jest',
   // testEnvironment: 'node',
-  testPathIgnorePatterns: ['out-tsc'],
+  testPathIgnorePatterns: ['dist'],
   setupTestFrameworkScriptFile: '<rootDir>/src/setup-tests.ts'
 }
 

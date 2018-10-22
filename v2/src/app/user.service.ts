@@ -1,4 +1,4 @@
-import { HttpClient } from './api.service'
+import { HttpClient } from './http-client.service'
 import { GithubUser, GithubUserRepo } from './models'
 
 export class UserService {

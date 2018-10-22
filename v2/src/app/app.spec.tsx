@@ -1,7 +1,7 @@
 import { mount } from 'enzyme'
 import React from 'react'
 
-import { HttpClient } from './api.service'
+import { HttpClient } from './http-client.service'
 import { App, Data } from './app'
 import { Profile } from './profile'
 import { Search } from './search'

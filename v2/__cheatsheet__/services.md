@@ -9,9 +9,9 @@ export class HttpClient {
     this.provider = axios.create({ baseURL })
   }
 
-  get<T>(url: string): Promise<T> {
+  get<T>(url: string) {
     return this.provider
-      .get(url)
+      .get<T>(url)
       .then((response) => response.data)
       .catch((reason: AxiosError) => {
         const error = reason.response ? reason.response.data : reason.response

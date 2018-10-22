@@ -46,7 +46,7 @@ export class App extends Component<Props, State> {
         <Search onSearch={this.fetchUser} />
         {loading ? <p data-test-id="loading">Loading user...</p> : null}
         {error ? (
-          <p data-test-id="error" className="text-error">
+          <p data-test-id="error" className="text-danger">
             Oh no panic! <Debug data={error} />
           </p>
         ) : null}

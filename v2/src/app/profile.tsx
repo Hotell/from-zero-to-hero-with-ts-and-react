@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 
 import { GithubUser, GithubUserRepo } from './models'
-import { Debug } from './debug'
 import { UserProfile } from './user-profile'
 import { UserRepos } from './user-repos'
 
